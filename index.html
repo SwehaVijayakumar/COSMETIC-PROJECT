@@ -265,7 +265,46 @@
       justify-content:space-between;
       gap:12px;
     }
+    .nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+}
 
+/* Adjust nav layout */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 58px; /* just below header */
+    right: 20px;
+    width: calc(100% - 40px);
+    background: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    z-index: 99;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+}
     /* responsiveness */
     @media (max-width:880px){
       .hero{ height:520px; }
@@ -279,6 +318,14 @@
       nav{ display:none; }
     }
   </style>
+  <script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+</script>
 </head>
 <body>
 
@@ -286,11 +333,16 @@
     <div class="container topbar">
       <div class="logo">MESWA</div>
       <nav>
+        <div class="nav-links" id="navLinks">
         <a href="#">Makeup</a>
         <a href="#">Skincare</a>
         <a href="#">Brushes</a>
         <a href="#">About</a>
         <button class="btn">Shop Now</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Menu">
+        ☰
+      </button>
       </nav>
     </div>
   </header>
