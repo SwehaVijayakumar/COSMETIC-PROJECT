@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MESWA</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink-100: #f7dfe0;
+      --pink-200: #f1c9c9;
+      --pink-300: #e8b6b6;
+      --accent: #e7a8a8;
+      --muted: #8b6565;
+      --card-radius: 14px;
+      --max-width: 1100px;
+      --shadow: 0 8px 25px rgba(18,12,12,0.06);
+      --shadow-soft: 0 6px 18px rgba(18,12,12,0.06);
+      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: linear-gradient(180deg, #fff 0%, #fff 40%, var(--pink-100) 40%, #fff 100%);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.35;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    /* Header */
+    header{
+      background:#fff;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .topbar{
+      height:58px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo{
+      font-weight:700;
+      letter-spacing:1px;
+      font-size:20px;
+      color:#1f1f1f;
+    }
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn{
+      padding:9px 14px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      background:var(--accent);
+      color:white;
+      box-shadow:var(--shadow-soft);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      height:420px;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .hero__bg{
+      position:absolute;
+      inset:0;
+      background-image: url("C:/Users/ASUS/Documents/Cosmetic website/images/home.jpg");
+      background-size:cover;
+      background-position:center right;
+      filter: saturate(.95) contrast(.98);
+      transform: scale(1.02);
+      opacity:1;
+    }
+    /* soft overlay to keep text readable */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.3) 100%);
+    }
+    .hero__content{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:38px;
+      gap:20px;
+    }
+
+    .hero__text{
+      max-width:480px;
+    }
+    .hero__eyebrow{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:8px;
+      letter-spacing:1px;
+    }
+    .hero__title{
+      font-size:42px;
+      margin:6px 0 12px 0;
+      color:#2a2a2a;
+      font-weight:700;
+    }
+    .hero__cta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .ghost{
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.06);
+      padding:10px 14px;
+      border-radius:12px;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    /* Featured products */
+    section.featured{
+      margin:26px 0;
+      background:#fff;
+      padding:18px;
+      border-radius:14px;
+      box-shadow:var(--shadow-soft);
+    }
+    .featured h3{
+      margin:0 0 14px 0;
+      font-size:20px;
+      color:#222;
+    }
+    .grid-products{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap:12px;
+      align-items:start;
+    }
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:14px;
+      text-align:center;
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .card img{
+      width:100%;
+      height:110px;
+      object-fit:cover;
+      border-radius:10px;
+      margin-bottom:10px;
+    }
+    .card h4{
+      margin:0;
+      font-size:14px;
+      color:#333;
+      font-weight:600;
+    }
+    .card p{ font-size:13px; color:var(--muted); margin:6px 0 0 0; }
+
+    /* Sale banner */
+    .sale{
+      margin:26px 0;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:20px;
+      align-items:center;
+      background: linear-gradient(180deg,#fff 0%, #fff 60%, var(--pink-100) 60%);
+      padding:20px;
+      border-radius:14px;
+    }
+    .sale .media{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+    .sale img{
+      width:220px;
+      height:220px;
+      object-fit:cover;
+      border-radius:12px;
+      box-shadow:var(--shadow-soft);
+    }
+    .sale .copy h3{
+      margin:0;
+      font-size:28px;
+      font-weight:700;
+    }
+    .sale .copy p{
+      color:var(--muted);
+      margin:10px 0 16px 0;
+    }
+
+    /* Info cards */
+    .info-row{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+      margin:26px 0;
+    }
+    .info{
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      text-align:center;
+      box-shadow:var(--shadow-soft);
+    }
+    .info .thumb{
+      height:120px;
+      width:100%;
+      border-radius:10px;
+      object-fit:cover;
+      margin-bottom:12px;
+    }
+    .info h4{ margin:0 0 8px 0; font-size:16px; }
+    .info p{ color:var(--muted); font-size:14px; margin:0; }
+
+    /* Footer */
+    footer{
+      margin-top:28px;
+      padding:26px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    /* responsiveness */
+    @media (max-width:880px){
+      .hero{ height:520px; }
+      .hero__content{ flex-direction:column; align-items:flex-start; padding:24px; }
+      .sale{ grid-template-columns: 1fr; padding:16px; }
+      .sale img{ width:180px; height:180px; }
+    }
+    @media (max-width:460px){
+      .hero__title{ font-size:28px; }
+      .hero{ height:480px; }
+      nav{ display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container topbar">
+      <div class="logo">MESWA</div>
+      <nav>
+        <a href="#">Makeup</a>
+        <a href="#">Skincare</a>
+        <a href="#">Brushes</a>
+        <a href="#">About</a>
+        <button class="btn">Shop Now</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero banner">
+      <div class="hero__bg" role="img" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__text">
+          <div class="hero__eyebrow">Glow like</div>
+          <h1 class="hero__title">Glow like never before!</h1>
+          <p style="color:var(--muted); margin-bottom:16px;">
+            Discover nourishing, radiant skincare — crafted to make your skin luminous and camera-ready.
+          </p>
+
+          <div class="hero__cta">
+            <button class="btn">Shop Gift</button>
+            <button class="ghost">Learn More</button>
+          </div>
+        </div>
+
+        <!-- small visual product stack (placeholder) -->
+        <div style="display:flex; gap:10px; align-items:center;">
+          <!-- using same uploaded image as illustrative product thumbnails -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="featured" aria-label="Featured products">
+      <h3>Featured Product</h3>
+      <div class="grid-products">
+        <div class="card">
+          <img src="C:/Users/ASUS/Documents/Cosmetic website/images/lipsticks.jpg" alt="lipstick">
+          <h4>Lavender Kiss</h4>
+          <p>Matte lipstick • ₹499</p>
+        </div>
+        <div class="card">
+          <img src="C:/Users/ASUS/Documents/Cosmetic website/images/serum1.jpg" alt="foundation">
+          <h4>Radiant Serum</h4>
+          <p>Brightening serum • ₹1299</p>
+        </div>
+        <div class="card">
+          <img src="C:/Users/ASUS/Documents/Cosmetic website/images/compact.jpg" alt="compact">
+          <h4>Silk Powder</h4>
+          <p>Light finishing powder • ₹799</p>
+        </div>
+        <div class="card">
+          <img src="C:/Users/ASUS/Documents/Cosmetic website/images/blush.jpg" alt="blush">
+          <h4>Peach Blush</h4>
+          <p>Cream blush • ₹599</p>
+        </div>
+        <div class="card">
+          <img src="C:/Users/ASUS/Documents/Cosmetic website/images/palette.jpg" alt="palette">
+          <h4>Glow Palette</h4>
+          <p>Highlight & bronze • ₹1499</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sale banner -->
+    <section class="sale" aria-label="Sale">
+      <div class="media">
+        <img src="C:/Users/ASUS/Documents/Cosmetic website/images/sales-product.jpg" alt="sale products" />
+      </div>
+      <div class="copy">
+        <h3>Spring Beauty Sale<br><small style="font-weight:600;color:var(--muted);font-size:14px;">Up to 40% Off</small></h3>
+        <p>Shop our curated sets and best-selling skincare essentials. Limited time only — refresh your routine with a glowing finish.</p>
+        <div style="margin-top:14px;">
+          <button class="btn">Shop Now</button>
+          <button class="ghost">View Sets</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- three info cards -->
+    <div class="info-row">
+      <div class="info">
+        <img class="thumb" src="C:/Users/ASUS/Documents/Cosmetic website/images/cleanser.jpg" alt="skin cleanser">
+        <h4>Gentle Cleansers</h4>
+        <p>Daily cleansers that remove impurities without stripping skin.</p>
+      </div>
+      <div class="info">
+        <img class="thumb" src="C:/Users/ASUS/Documents/Cosmetic website/images/botanical-extracts.jpg" alt="rose products">
+        <h4>Botanical Extracts</h4>
+        <p>Products rich in rose & hyaluronic acid for dewy skin.</p>
+      </div>
+      <div class="info">
+        <img class="thumb" src="C:/Users/ASUS/Documents/Cosmetic website/images/cleanbeauty.jpg" alt="model">
+        <h4>Clean Beauty</h4>
+        <p>Formulas made without parabens, sulfates and harmful additives.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          © <strong>MESWA</strong> — All rights reserved.
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <small>Privacy</small>
+          <small>Terms</small>
+          <small>Contact</small>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+</body>
+</html>
